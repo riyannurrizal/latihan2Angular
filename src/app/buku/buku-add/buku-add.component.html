@@ -1,22 +1,24 @@
 <h4>Pinjam Buku</h4>
-
-<table class="table table-striped table-bordered table-hover table-condensed">
-  <thead>
-    <tr>
-      <th>
-        <input type="text" class="form-control" value="ISBN" placeholder="ISBN" [(ngModel)]="inputInfo.isbn" id="inputIsbn">
-      </th>
-      <th>
-        <input type="text" class="form-control" value="Nama" placeholder="Nama" [(ngModel)]="inputInfo.nama" id="inputNama"
-          #inputNama>
-      </th>
-      <th>
-        <input type="number" class="form-control" value="Qty" placeholder="Qty" [(ngModel)]="inputInfo.qty" id="inputQty"
-          #inputQty>
-      </th>
-      <th>
-        <button type="submit" class="btn btn-primary" (click)="tambahBuku()">Pilih</button>
-      </th>
-    </tr>
-  </thead>
-</table>
+<form [formGroup]="bukuForm" (ngSubmit)="kirim()">
+  <input type="text" [formControlName]="'isbn'" class="form-control" placeholder="ISBN" [(ngModel)]="inputInfo.isbn">
+  <span *ngIf="!bukuForm.get('isbn').valid && bukuForm.get('isbn').touched" class='help-block'>
+    <span *ngIf="bukuForm.get('isbn').errors['required']">Wajib di isi!!</span>
+    <span *ngIf="bukuForm.get('isbn').errors['blank']">Tidak Boleh Kosong!!</span>
+  </span>
+  <br>
+  <input type="text" [formControlName]="'nama'" class="form-control" placeholder="Nama" [(ngModel)]="inputInfo.nama">
+  <span *ngIf="!bukuForm.get('nama').valid && bukuForm.get('nama').touched" class='help-block'>
+    <span *ngIf="bukuForm.get('nama').errors['required']">Wajib di isi!!</span>
+    <span *ngIf="bukuForm.get('nama').errors['blank']">Tidak Boleh Kosong!!</span>
+  </span>
+  <br>
+  <input type="text" [formControlName]="'qty'" class="form-control" placeholder="QTY" [(ngModel)]="inputInfo.qty">
+  <span *ngIf="!bukuForm.get('qty').valid && bukuForm.get('qty').touched" class='help-block'>
+    <span *ngIf="bukuForm.get('qty').errors['required']">Wajib di isi!!</span>
+    <span *ngIf="bukuForm.get('qty').errors['blank']">Tidak Boleh Kosong!!</span>
+  </span>
+  <br>
+  <br>
+  <br>
+  <button type="submit" class="btn btn-primary" (click)="tambahBuku()">Pilih</button>
+</form>
